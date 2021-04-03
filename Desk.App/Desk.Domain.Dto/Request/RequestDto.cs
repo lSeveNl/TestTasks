@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Desk.Domain.Common;
 using Desk.Domain.Dictionary.RequestModels;
 using Desk.Domain.Dto.Common;
 
