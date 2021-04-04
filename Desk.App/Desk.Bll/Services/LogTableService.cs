@@ -24,6 +24,7 @@ namespace Desk.Bll.Services
             var entity = this._mapper.Map<LogTable>(dto);
 
             await this._context.AddAsync(entity);
+            await this._context.SaveChangesAsync();
         }
     }
 }

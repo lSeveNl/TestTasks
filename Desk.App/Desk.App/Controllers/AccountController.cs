@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Desk.Core.Services;
 using Desk.Domain.Auth;
-using Journal.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

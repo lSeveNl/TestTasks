@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Desk.Core.Services;
 using Desk.Domain.Dto.Request;
-using Microsoft.AspNetCore.Authorization;
+using Desk.Core.Services;
 
 namespace Desk.App.Controllers
 {
     [Route("api/[controller]/[action]/{id?}")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = "Bearer")]
-    public class RequestController : Controller, IOperationController<RequestDto>
+    public class RequestTypeController : Controller, IOperationController<RequestTypeDto>
     {
-        private readonly IRequestService _service;
+        private readonly IRequestTypeService _service;
 
-        public RequestController(IRequestService service)
+        public RequestTypeController(IRequestTypeService service)
         {
             _service = service;
         }
@@ -34,24 +37,16 @@ namespace Desk.App.Controllers
             return this.Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Search([FromBody] RequestEntitySearchRequest request)
-        {
-            var result = await this._service.Search(request);
-
-            return this.Ok(result);
-        }
-
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] RequestDto dto)
+        public async Task<IActionResult> Post([FromBody] RequestTypeDto dto)
         {
-            var result = await _service.AddAsync(dto);
+            await _service.AddAsync(dto);
 
-            return this.Ok(result);
+            return this.Ok();
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] RequestDto dto)
+        public IActionResult Put([FromBody] RequestTypeDto dto)
         {
             this._service.UpdateAsync(dto);
 

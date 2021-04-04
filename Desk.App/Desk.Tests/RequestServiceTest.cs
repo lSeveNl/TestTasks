@@ -1,5 +1,4 @@
 using System;
-using Desk.App.Controllers;
 using Desk.Core.Services;
 using Desk.Domain.Dto.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,16 +9,13 @@ using Assert = Xunit.Assert;
 namespace Desk.Tests
 {
     [TestClass]
-    public class RequestControllerTest
+    public class RequestServiceTest
     {
         private readonly Mock<IRequestService> _service;
 
-        private readonly Mock<RequestController> _controller;
-
-        public RequestControllerTest()
+        public RequestServiceTest()
         {
             _service = new Mock<IRequestService>();
-            _controller = new Mock<RequestController>(_service.Object);
         }
 
         [TestInitialize]

@@ -12,7 +12,7 @@ namespace Desk.Core.Services.Common
 
         Task<List<TEntityDto>> ListAsync();
 
-        void UpdateAsync(TEntityDto dto);
+        Task UpdateAsync(TEntityDto dto);
 
         Task RemoveAsync(int id);
     }

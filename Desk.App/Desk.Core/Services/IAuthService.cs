@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Desk.Domain.Auth;
 
-namespace Journal.Core.Services
+namespace Desk.Core.Services
 {
     public interface IAuthService
     {

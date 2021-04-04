@@ -1,4 +1,6 @@
-﻿using Desk.Domain.Dto.Common;
+﻿using System;
+using Desk.Domain.Dto.Common;
+using Desk.Domain.Enums;
 
 namespace Desk.Domain.Dto.User
 {
@@ -12,6 +14,18 @@ namespace Desk.Domain.Dto.User
 
         public string Surname { get; set; }
 
-        public string FullName { get; set; }
+        public string Login { get; set; }
+
+        public AuthRole AuthRole { get; set; }
+
+        public string AuthRoleName { get; set; }
+
+        public string Password { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

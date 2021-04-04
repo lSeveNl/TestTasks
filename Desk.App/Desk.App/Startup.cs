@@ -1,6 +1,7 @@
 using Autofac;
 using AutoMapper;
 using Desk.Bll.DI;
+using Desk.DAL.Context;
 using Desk.DAL.Mapping;
 using Desk.Domain.Auth;
 using Microsoft.AspNetCore.Builder;
@@ -11,20 +12,30 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using VueCliMiddleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 
 namespace Desk.App
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging();
+
+            services.AddHttpContextAccessor();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -42,6 +53,8 @@ namespace Desk.App
                         ValidateIssuerSigningKey = true
                     };
                 });
+
+            services.AddDbContext<DeskContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("Desk")));
 
             var cfg = new MapperConfiguration(cfg => cfg.AddProfile(new DalMapping()));
             services.AddSingleton(cfg.CreateMapper());

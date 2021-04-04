@@ -1,13 +1,13 @@
 ﻿using System;
-using Desk.Domain.Common;
+using Desk.Domain.Dto.Common;
 
-namespace Desk.Domain.Dictionary.RequestModels
+namespace Desk.Domain.Dto.Request
 {
-    public class RequestType : IEntity, ISoftDelete
+    public class RequestTypeDto : IDto
     {
-        private string _name;
-
         public int Id { get; set; }
+
+        private string _name;
 
         public string Name
         {
@@ -16,7 +16,5 @@ namespace Desk.Domain.Dictionary.RequestModels
         }
 
         public DateTime Created { get; set; }
-
-        public bool IsDeleted { get; set; }
     }
 }

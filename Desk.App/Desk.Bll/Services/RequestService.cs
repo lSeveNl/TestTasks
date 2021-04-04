@@ -36,13 +36,14 @@ namespace Desk.Bll.Services
 
         async Task<bool> IRequestService.AddAsync(RequestDto dto)
         {
-            dto.Id = int.Parse(this._httpContextAccessor.HttpContext.User.Identity.Name);
+            //dto.Id = int.Parse(this._httpContextAccessor.HttpContext.User.Identity.Name);
 
             var entity = this.Mapper.Map<Request>(dto);
 
             try
             {
                 await this.Context.AddAsync(entity);
+                await this.Context.SaveChangesAsync();
 
                 return true;
             }
@@ -54,6 +55,8 @@ namespace Desk.Bll.Services
                     ServiceName = nameof(RequestService),
                     ErrorMessage = e.Message
                 });
+
+                await this.Context.SaveChangesAsync();
 
                 return false;
             }
@@ -96,7 +99,7 @@ namespace Desk.Bll.Services
                 query = query.And(x => x.UserId == request.UserIdFilter);
             }
 
-            return await entities.AsExpandable()
+            return await entities
                 .Include(x => x.User)
                 .Include(x => x.RequestType)
                 .Where(query)

@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Desk.App.Controllers
 {
-    [Authorize(AuthenticationSchemes = "Bearer")]
-    [Route("api/[controller]/[action]/{id}")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Route("api/[controller]/[action]/{id?}")]
     [ApiController]
     public class UserController : Controller, IOperationController<UserDto>
     {

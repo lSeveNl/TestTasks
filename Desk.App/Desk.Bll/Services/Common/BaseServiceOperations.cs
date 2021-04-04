@@ -26,6 +26,7 @@ namespace Desk.Bll.Services.Common
         public virtual async Task AddAsync(TDto dto)
         {
             await this.Context.AddAsync(this.Mapper.Map<TEntity>(dto));
+            await this.Context.SaveChangesAsync();
         }
 
         public virtual async Task<TDto> GetAsync(int id)
@@ -45,9 +46,10 @@ namespace Desk.Bll.Services.Common
                 .ToListAsync();
         }
 
-        public virtual void UpdateAsync(TDto dto)
+        public virtual async Task UpdateAsync(TDto dto)
         {
              this.Context.Update(this.Mapper.Map<TEntity>(dto));
+             await this.Context.SaveChangesAsync();
         }
     }
 }

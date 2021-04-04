@@ -1,18 +1,16 @@
 ﻿using Desk.DAL.Modeling;
 using Desk.Domain.Auth;
-using Desk.Domain.Dictionary;
 using Desk.Domain.Dictionary.RequestModels;
+using Desk.Domain.Registration;
 using Microsoft.EntityFrameworkCore;
 
 namespace Desk.DAL.Context
 {
     public class DeskContext : DbContext
     {
-        private readonly DbContextOptions<DeskContext> _options;
         public DeskContext(DbContextOptions<DeskContext> options)
             :base(options)
         {
-            _options = options;
         }
 
         public DbSet<User> Users { get; set; }
@@ -21,12 +19,15 @@ namespace Desk.DAL.Context
 
         public DbSet<RequestType> RequestTypes { get; set; }
 
+        public DbSet<LogTable> LogTables { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Request>().HasQueryFilter(x => x.IsDeleted);
-            modelBuilder.Entity<User>().HasQueryFilter(x => x.IsDeleted);
+            modelBuilder.Entity<RequestType>().HasQueryFilter(x => !x.IsDeleted);
+            modelBuilder.Entity<Request>().HasQueryFilter(x => !x.IsDeleted);
+            modelBuilder.Entity<User>().HasQueryFilter(x => !x.IsDeleted);
 
             const string schema = "dbo";
 

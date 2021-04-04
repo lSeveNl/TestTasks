@@ -4,7 +4,7 @@ using Desk.Domain.Dto.Common;
 
 namespace Desk.Core.Services.Common
 {
-    public interface ISearchableService<TDto, TRequest> 
+    public interface ISearchableService<TDto, in TRequest> 
         where TDto : IDto
         where TRequest : ISearchRequestBase
     {

@@ -1,5 +1,4 @@
 ﻿using Desk.Domain.Auth;
-using Desk.Domain.Dictionary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Desk.Core.Services;
 using Desk.DAL.Context;
 using Desk.DAL.Extensions;
 using Desk.Domain.Auth;
-using Journal.Core.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
